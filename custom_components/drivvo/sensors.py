@@ -50,7 +50,9 @@ SENSOR_TYPES: tuple[DrivvoSensorEntityDescription, ...] = (
         icon="mdi:speedometer",
         device_class=SensorDeviceClass.DISTANCE,
         state_class=SensorStateClass.TOTAL_INCREASING,
-        native_unit_of_measurement=UnitOfLength.KILOMETERS,
+        unit_fn=lambda data: UnitOfLength.MILES
+        if data.distance_unit == "mi"
+        else UnitOfLength.KILOMETERS,
         value_fn=lambda data: data.odometer,
     ),
     DrivvoSensorEntityDescription(
@@ -67,7 +69,9 @@ SENSOR_TYPES: tuple[DrivvoSensorEntityDescription, ...] = (
         name="Refuelling Last Average",
         icon="mdi:fuel",
         state_class=SensorStateClass.MEASUREMENT,
-        native_unit_of_measurement=UnitOfFuelEfficiency.KILOMETERS_PER_LITER,
+        unit_fn=lambda data: UnitOfFuelEfficiency.MILES_PER_GALLON
+        if data.distance_unit == "mi"
+        else UnitOfFuelEfficiency.KILOMETERS_PER_LITER,
         value_fn=lambda data: data.refuelling_last_average,
         suggested_display_precision=2,
     ),
@@ -77,7 +81,9 @@ SENSOR_TYPES: tuple[DrivvoSensorEntityDescription, ...] = (
         name="Refuelling General Average",
         icon="mdi:fuel",
         state_class=SensorStateClass.MEASUREMENT,
-        native_unit_of_measurement=UnitOfFuelEfficiency.KILOMETERS_PER_LITER,
+        unit_fn=lambda data: UnitOfFuelEfficiency.MILES_PER_GALLON
+        if data.distance_unit == "mi"
+        else UnitOfFuelEfficiency.KILOMETERS_PER_LITER,
         value_fn=lambda data: data.refuelling_general_average,
         suggested_display_precision=2,
     ),
@@ -116,7 +122,9 @@ SENSOR_TYPES: tuple[DrivvoSensorEntityDescription, ...] = (
         name="Refuelling Odometer",
         icon="mdi:speedometer",
         device_class=SensorDeviceClass.DISTANCE,
-        native_unit_of_measurement=UnitOfLength.KILOMETERS,
+        unit_fn=lambda data: UnitOfLength.MILES
+        if data.distance_unit == "mi"
+        else UnitOfLength.KILOMETERS,
         value_fn=lambda data: data.refuelling_odometer,
     ),
     DrivvoSensorEntityDescription(
@@ -165,7 +173,9 @@ SENSOR_TYPES: tuple[DrivvoSensorEntityDescription, ...] = (
         icon="mdi:road",
         device_class=SensorDeviceClass.DISTANCE,
         state_class=SensorStateClass.MEASUREMENT,
-        native_unit_of_measurement=UnitOfLength.KILOMETERS,
+        unit_fn=lambda data: UnitOfLength.MILES
+        if data.distance_unit == "mi"
+        else UnitOfLength.KILOMETERS,
         value_fn=lambda data: data.refuelling_distance,
     ),
     DrivvoSensorEntityDescription(
@@ -185,7 +195,9 @@ SENSOR_TYPES: tuple[DrivvoSensorEntityDescription, ...] = (
         icon="mdi:fuel",
         device_class=SensorDeviceClass.VOLUME,
         state_class=SensorStateClass.TOTAL,
-        native_unit_of_measurement=UnitOfVolume.LITERS,
+        unit_fn=lambda data: UnitOfVolume.GALLONS
+        if data.distance_unit == "mi"
+        else UnitOfVolume.LITERS,
         value_fn=lambda data: data.refuelling_volume,
         suggested_display_precision=2,
     ),
@@ -196,7 +208,9 @@ SENSOR_TYPES: tuple[DrivvoSensorEntityDescription, ...] = (
         icon="mdi:fuel",
         device_class=SensorDeviceClass.VOLUME,
         state_class=SensorStateClass.TOTAL,
-        native_unit_of_measurement=UnitOfVolume.LITERS,
+        unit_fn=lambda data: UnitOfVolume.GALLONS
+        if data.distance_unit == "mi"
+        else UnitOfVolume.LITERS,
         value_fn=lambda data: data.refuelling_volume_total,
         suggested_display_precision=2,
     ),
