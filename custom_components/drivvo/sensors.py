@@ -195,7 +195,9 @@ SENSOR_TYPES: tuple[DrivvoSensorEntityDescription, ...] = (
         icon="mdi:fuel",
         device_class=SensorDeviceClass.VOLUME,
         state_class=SensorStateClass.TOTAL,
-        native_unit_of_measurement=UnitOfVolume.LITERS,
+        unit_fn=lambda data: UnitOfVolume.GALLONS
+        if data.distance_unit == "mi"
+        else UnitOfVolume.LITERS,
         value_fn=lambda data: data.refuelling_volume,
         suggested_display_precision=2,
     ),
@@ -206,7 +208,9 @@ SENSOR_TYPES: tuple[DrivvoSensorEntityDescription, ...] = (
         icon="mdi:fuel",
         device_class=SensorDeviceClass.VOLUME,
         state_class=SensorStateClass.TOTAL,
-        native_unit_of_measurement=UnitOfVolume.LITERS,
+        unit_fn=lambda data: UnitOfVolume.GALLONS
+        if data.distance_unit == "mi"
+        else UnitOfVolume.LITERS,
         value_fn=lambda data: data.refuelling_volume_total,
         suggested_display_precision=2,
     ),
