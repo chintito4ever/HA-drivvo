@@ -161,7 +161,7 @@ async def get_data_vehicle(hass, user, password, id_vehicle):
                 response_refuelling.json(), key=sort_by_key, reverse=True
             )
         else:
-            api_data_refuellings = None
+            api_data_refuellings = []
         _LOGGER.debug(
             "API Response Data Vehicle %s - Refuelling: %s",
             id_vehicle,
@@ -175,7 +175,7 @@ async def get_data_vehicle(hass, user, password, id_vehicle):
                 response_services.json(), key=sort_by_key, reverse=True
             )
         else:
-            api_data_services = None
+            api_data_services = []
         _LOGGER.debug(
             "API Response Data Vehicle %s - Services: %s", id_vehicle, api_data_services
         )
@@ -187,7 +187,7 @@ async def get_data_vehicle(hass, user, password, id_vehicle):
                 response_expenses.json(), key=sort_by_key, reverse=True
             )
         else:
-            api_data_expenses = None
+            api_data_expenses = []
         _LOGGER.debug(
             "API Response Data Vehicle %s - Expenses: %s", id_vehicle, api_data_expenses
         )

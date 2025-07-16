@@ -49,10 +49,10 @@ If the button above doesn't work, you can also perform the following steps manua
 
 ## Available Sensors
 
-After the integration is set up, the following sensors will be available for each configured vehicle:
+After the integration is set up, the following sensors will be available for each configured vehicle. Units of measurement are taken from your Drivvo account settings:
 
 - **Vehicle**: Vehicle name and model
-- **Odometer**: Current vehicle odometer reading
+- **Odometer**: Current vehicle odometer reading (units follow your Drivvo distance preference)
 - **Odometer Date**: Date of last odometer update
 - **Refuelling Total**: Number of total refuelling events
 - **Refuelling Last Average**: Last fuel consumption average
@@ -61,12 +61,12 @@ After the integration is set up, the following sensors will be available for eac
 - **Refuelling Type**: Type of fuel used
 - **Refuelling Reason**: Reason for the last refuelling
 - **Refuelling Date**: Date of last refuelling
-- **Refuelling Odometer**: Odometer of last refuelling
+- **Refuelling Odometer**: Odometer of last refuelling (uses your preferred distance unit)
 - **Refuelling Value**: Cost of last refuelling
 - **Refuelling Price**: Price per liter/gallon of last refuelling
 - **Refuelling Value Total**: Total cost of all refuellings
 - **Refuelling Tank Full**: Whether the tank was filled completely
-- **Refuelling Distance**: Distance traveled since last refuelling
+- **Refuelling Distance**: Distance traveled since last refuelling (uses your preferred distance unit)
 - **Refuelling Price Lowest**: Lowest fuel price recorded
 - **Refuelling Volume**: Volume of fuel in last refuelling
 - **Refuelling Volume Total**: Total volume of fuel refuelled
