@@ -68,8 +68,8 @@ After the integration is set up, the following sensors will be available for eac
 - **Refuelling Tank Full**: Whether the tank was filled completely
 - **Refuelling Distance**: Distance traveled since last refuelling (uses your preferred distance unit)
 - **Refuelling Price Lowest**: Lowest fuel price recorded
-- **Refuelling Volume**: Volume of fuel in last refuelling
-- **Refuelling Volume Total**: Total volume of fuel refuelled
+- **Refuelling Volume**: Volume of fuel in last refuelling (uses your preferred volume unit)
+- **Refuelling Volume Total**: Total volume of fuel refuelled (uses your preferred volume unit)
 
 ## Debugging
 
