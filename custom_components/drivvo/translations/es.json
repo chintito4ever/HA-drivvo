@@ -155,6 +155,9 @@
       "refuelling_volume_total": {
         "name": "Volumen total de repostajes"
       },
+      "last_update": {
+        "name": "Última actualización"
+      },
       "odometer_value": {
         "name": "Valor del cuentakilómetros"
       },

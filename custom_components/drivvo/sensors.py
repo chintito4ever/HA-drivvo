@@ -214,4 +214,12 @@ SENSOR_TYPES: tuple[DrivvoSensorEntityDescription, ...] = (
         value_fn=lambda data: data.refuelling_volume_total,
         suggested_display_precision=2,
     ),
+    DrivvoSensorEntityDescription(
+        key="last_update",
+        translation_key="last_update",
+        name="Last Update",
+        icon="mdi:clock-outline",
+        device_class=SensorDeviceClass.TIMESTAMP,
+        value_fn=lambda data: data.last_update,
+    ),
 )
