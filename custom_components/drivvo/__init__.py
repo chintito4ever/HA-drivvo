@@ -1,6 +1,7 @@
 import dataclasses
 import hashlib
 import logging
+from datetime import datetime
 
 import requests
 
@@ -434,6 +435,7 @@ async def get_data_vehicle(hass, user, password, id_vehicle):
             refuelling_volume=refuelling_volume,
             refuelling_volume_total=refuelling_volume_total,
             currency=currency,
+            last_update=datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"),
         )
 
         _LOGGER.debug("API Response Data Vehicle - Refuelling: %s", data_return)
@@ -470,3 +472,4 @@ class DrivvoDataVehicle:
     distance_unit: str
     refuelling_volume_total: float | None
     currency: str | None
+    last_update: str | None

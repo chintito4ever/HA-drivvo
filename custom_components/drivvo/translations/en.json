@@ -158,6 +158,9 @@
       "refuelling_volume_total": {
         "name": "Refuelling Volume Total"
       },
+      "last_update": {
+        "name": "Last Update"
+      },
       "odometer_value": {
         "name": "Odometer value"
       },

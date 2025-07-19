@@ -70,6 +70,7 @@ After the integration is set up, the following sensors will be available for eac
 - **Refuelling Price Lowest**: Lowest fuel price recorded
 - **Refuelling Volume**: Volume of fuel in last refuelling (uses your preferred volume unit)
 - **Refuelling Volume Total**: Total volume of fuel refuelled (uses your preferred volume unit)
+- **Last Update**: Timestamp of the last successful data update
 
 ## Debugging
 
