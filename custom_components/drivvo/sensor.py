@@ -11,7 +11,6 @@ from homeassistant.components.sensor import (
     SensorEntity,
     SensorDeviceClass,
 )
-from homeassistant.const import STATE_UNKNOWN
 import homeassistant.helpers.config_validation as cv
 from homeassistant.helpers import device_registry as dr
 from homeassistant.helpers.entity import DeviceInfo
@@ -212,7 +211,7 @@ class DrivvoSensorEntity(CoordinatorEntity, SensorEntity):
     def native_value(self) -> Any:
         """Return the sensor value."""
         if self.coordinator.data is None:
-            return STATE_UNKNOWN
+            return None
 
         if self.entity_description.key == "vehicle" and self._model:
             return self._model
@@ -234,17 +233,15 @@ class DrivvoSensorEntity(CoordinatorEntity, SensorEntity):
                             dt_obj = dt_obj.replace(tzinfo=dt_util.UTC)
                         return dt_util.convert(dt_obj, self.hass.config.time_zone)
                     except (ValueError, TypeError) as e:
-                        _LOGGER.error(
-                            "Error parsing timestamp '%s': %s", value, e
-                        )
-                        return STATE_UNKNOWN
+                        _LOGGER.error("Error parsing timestamp '%s': %s", value, e)
+                        return None
 
                 return value
         except (KeyError, AttributeError) as e:
             _LOGGER.error(f"Error getting value for {self.entity_description.key}: {e}")
-            return STATE_UNKNOWN
+            return None
 
-        return STATE_UNKNOWN
+        return None
 
     @property
     def icon(self) -> str:
