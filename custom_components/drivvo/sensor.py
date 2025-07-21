@@ -19,6 +19,7 @@ from homeassistant.helpers.issue_registry import IssueSeverity, async_create_iss
 from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
     DataUpdateCoordinator,
+    UpdateFailed,
 )
 
 from . import get_data_vehicle
@@ -61,12 +62,15 @@ async def async_setup_entry(
     for vehicle in config[CONF_VEHICLES]:
         # Create a unique update method for this specific vehicle
         async def _update_for_vehicle(vehicle_id=vehicle):
-            return await get_data_vehicle(
+            data = await get_data_vehicle(
                 hass,
                 user=config[CONF_EMAIL],
                 password=config[CONF_PASSWORD],
                 id_vehicle=vehicle_id,
             )
+            if data is None:
+                raise UpdateFailed("Failed to update data")
+            return data
 
         # Get initial data for the vehicle
         vehicle_data = await get_data_vehicle(
@@ -198,6 +202,11 @@ class DrivvoSensorEntity(CoordinatorEntity, SensorEntity):
             model=f"{coordinator.data.manufacturer} {coordinator.data.model}",
             sw_version="2.0.0",
         )
+
+    @property
+    def available(self) -> bool:
+        """Return if entity is available."""
+        return self.coordinator.data is not None
 
     @property
     def native_value(self) -> Any:
