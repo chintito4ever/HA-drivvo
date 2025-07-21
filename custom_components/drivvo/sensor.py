@@ -1,7 +1,7 @@
 import logging
 from typing import Any
-from datetime import datetime
-import pytz
+
+from homeassistant.util import dt as dt_util
 
 import voluptuous as vol
 
@@ -227,11 +227,16 @@ class DrivvoSensorEntity(CoordinatorEntity, SensorEntity):
                     and isinstance(value, str)
                 ):
                     try:
-                        # Parse the datetime string and make it timezone-aware
-                        dt_obj = datetime.strptime(value, "%Y-%m-%d %H:%M:%S")
-                        return dt_obj.replace(tzinfo=pytz.UTC)
-                    except ValueError as e:
-                        _LOGGER.error(f"Error parsing timestamp '{value}': {e}")
+                        dt_obj = dt_util.parse_datetime(value)
+                        if dt_obj is None:
+                            raise ValueError("Unable to parse timestamp")
+                        if dt_obj.tzinfo is None:
+                            dt_obj = dt_obj.replace(tzinfo=dt_util.UTC)
+                        return dt_util.convert(dt_obj, self.hass.config.time_zone)
+                    except (ValueError, TypeError) as e:
+                        _LOGGER.error(
+                            "Error parsing timestamp '%s': %s", value, e
+                        )
                         return STATE_UNKNOWN
 
                 return value
