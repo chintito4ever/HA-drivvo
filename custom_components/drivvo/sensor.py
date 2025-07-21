@@ -231,7 +231,20 @@ class DrivvoSensorEntity(CoordinatorEntity, SensorEntity):
                             raise ValueError("Unable to parse timestamp")
                         if dt_obj.tzinfo is None:
                             dt_obj = dt_obj.replace(tzinfo=dt_util.UTC)
-                        return dt_util.convert(dt_obj, self.hass.config.time_zone)
+
+                        try:
+                            tz = dt_util.get_time_zone(self.hass.config.time_zone)
+                            if tz is not None:
+                                dt_obj = dt_obj.astimezone(tz)
+                        except Exception as tz_err:  # pylint: disable=broad-except
+                            _LOGGER.error(
+                                "Error converting timestamp '%s' to timezone %s: %s",
+                                value,
+                                self.hass.config.time_zone,
+                                tz_err,
+                            )
+
+                        return dt_obj
                     except (ValueError, TypeError) as e:
                         _LOGGER.error("Error parsing timestamp '%s': %s", value, e)
                         return None
